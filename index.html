@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ElectroMart CCC</title>
+  <meta name="description" content="ElectroMart's cash conversion cycle and the cash freed by each working capital lever, before and after the changes.">
+  <meta name="theme-color" content="#1f3864">
+  <meta name="apple-mobile-web-app-title" content="CCC App">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="ccc.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="page-head">
+    <p class="eyebrow">FIN 4150 · Working capital policy</p>
+    <h1>ElectroMart cash conversion cycle</h1>
+    <p class="lede">How long a dollar is tied up in ElectroMart's operations, and how much cash each working capital change freed.</p>
+  </header>
+
+  <main>
+    <p id="status" class="status" role="status">Loading data…</p>
+
+    <section id="cycle-section" class="card" aria-labelledby="cycle-title" hidden>
+      <h2 id="cycle-title">Cash conversion cycle</h2>
+      <p class="note">Days. The cycle is the time between paying suppliers and collecting from customers. Shorter means less cash tied up.</p>
+      <div class="table-wrap">
+      <table class="num-table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Before</th>
+            <th scope="col">After</th>
+            <th scope="col">Change</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">DIO<span class="sub">Days inventory outstanding</span></th>
+            <td id="dio-before"></td>
+            <td id="dio-after"></td>
+            <td id="dio-change"></td>
+          </tr>
+          <tr>
+            <th scope="row">DSO<span class="sub">Days sales outstanding</span></th>
+            <td id="dso-before"></td>
+            <td id="dso-after"></td>
+            <td id="dso-change"></td>
+          </tr>
+          <tr>
+            <th scope="row">DPO<span class="sub">Days payables outstanding</span></th>
+            <td id="dpo-before"></td>
+            <td id="dpo-after"></td>
+            <td id="dpo-change"></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row">CCC<span class="sub">DIO + DSO − DPO</span></th>
+            <td id="ccc-before"></td>
+            <td id="ccc-after"></td>
+            <td id="ccc-change"></td>
+          </tr>
+        </tfoot>
+      </table>
+      </div>
+      <details>
+        <summary>Show the math</summary>
+        <div id="cycle-math" class="math"></div>
+      </details>
+    </section>
+
+    <section id="cash-section" class="card" aria-labelledby="cash-title" hidden>
+      <h2 id="cash-title">Cash freed by each lever</h2>
+      <p class="note">A drop in inventory or receivables frees cash. A rise in accounts payable frees cash, because suppliers are financing more of the cycle.</p>
+      <div class="table-wrap">
+      <table class="num-table">
+        <thead>
+          <tr>
+            <th scope="col">Balance</th>
+            <th scope="col">Before</th>
+            <th scope="col">After</th>
+            <th scope="col">Cash freed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Inventory</th>
+            <td id="inv-before"></td>
+            <td id="inv-after"></td>
+            <td id="inv-freed"></td>
+          </tr>
+          <tr>
+            <th scope="row">Receivables</th>
+            <td id="ar-before"></td>
+            <td id="ar-after"></td>
+            <td id="ar-freed"></td>
+          </tr>
+          <tr>
+            <th scope="row">Payables</th>
+            <td id="ap-before"></td>
+            <td id="ap-after"></td>
+            <td id="ap-freed"></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row">Total</th>
+            <td></td>
+            <td></td>
+            <td id="total-freed"></td>
+          </tr>
+        </tfoot>
+      </table>
+      </div>
+      <details>
+        <summary>Check against the days</summary>
+        <div id="cash-math" class="math"></div>
+      </details>
+    </section>
+
+    <section id="data-section" class="card" aria-labelledby="data-title" hidden>
+      <h2 id="data-title">Data used</h2>
+      <p class="note">Read from <code>data/electromart.csv</code> and <code>data/assumptions.csv</code>.</p>
+      <div class="table-wrap">
+      <table class="num-table">
+        <thead>
+          <tr>
+            <th scope="col">Line</th>
+            <th scope="col">Before</th>
+            <th scope="col">After</th>
+          </tr>
+        </thead>
+        <tbody id="data-rows"></tbody>
+      </table>
+      </div>
+      <ul id="data-checks" class="checks"></ul>
+    </section>
+  </main>
+
+  <footer class="page-foot">
+    <p>Runs entirely in your browser. Nothing you see here is sent anywhere.</p>
+  </footer>
+</body>
+</html>
